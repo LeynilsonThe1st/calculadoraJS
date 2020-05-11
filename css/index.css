@@ -51,6 +51,7 @@ button {
   background: var(--cor-do-botao);
   border-radius: var(--raio-borda);
   border-left: 0.1rem solid #3b3c3d;
+  font-family: monaco, menlo, monospace;
   border-bottom: 0.2rem solid #3b3c3d;
   transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -webkit-transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -137,6 +138,7 @@ h3 span a {
 
 #calculadora #tela {
   font-size: 3rem;
+  font-family: monaco, menlo, monospace;
   text-align: right;
   background: #e0e0e0;
   padding: calc(1.5 * var(--espacamento-universal));
@@ -186,4 +188,46 @@ h3 span a {
   background: #3b3c3d;
   border-left: 0.0625rem solid #3b3c3d;
   border-bottom: 0.0625rem solid #3b3c3d;
+}
+
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h3, h3 span a {
+    font-size: 1rem;
+  }
+  #calculadora {
+    width: 300px;
+  }
+  #calculadora #tela {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  #calculadora {
+    width: 250px;
+  }
+  * {
+    gap: 0.2rem !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #calculadora {
+    width: 90%;
+    transform: none;
+    -webkit-transform: none;
+  }
+
+  #calculadora::after {
+    content: " ";
+    display: none;
+  }
+
+  #calculadora::before {
+    content: " ";
+    display: none;
+  }
+
 }
