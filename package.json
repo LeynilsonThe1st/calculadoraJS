@@ -1,0 +1,16 @@
+{
+  "name": "calculadorajs",
+  "version": "1.0.0",
+  "description": "Calculadora feita com html, css e javascript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "calculadora",
+    "javascript",
+    "javascript"
+  ],
+  "author": "Leynilson Harden",
+  "license": "UNLICENSED"
+}

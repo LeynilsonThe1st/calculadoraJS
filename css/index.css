@@ -1,0 +1,189 @@
+:root {
+  --cor-do-botao: #aaa;
+  --raio-borda: 0.125rem;
+  --cor-fonte-botao: white;
+  --margem-universal: 0.5rem;
+  --cor-de-fonte: #1b1c1d;
+  --espacamento-universal: 0.5rem;
+  --cor-de-fonte-secundaria: #2b2c2d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+html,
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  /* background-color: #f8f8f8; */
+  min-height: 400px;
+  background-color: #c8c8c8;
+  color: var(--cor-de-fonte);
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: visible;
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-appearance: button;
+  color: var(--cor-fonte-botao);
+  background: var(--cor-do-botao);
+  border-radius: var(--raio-borda);
+  border-left: 0.1rem solid #3b3c3d;
+  border-bottom: 0.2rem solid #3b3c3d;
+  transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: var(--espacamento-universal) calc(1.5 * var(--espacamento-universal));
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+h1{
+  margin: 0px;
+  font-size: 2rem;
+  color: steelblue;
+}
+
+h3 {
+  margin-top: 5px;
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+h3 span a {
+  color: goldenrod;
+  font-size: 1.2rem;
+  text-decoration: none;
+  border-bottom: 0.1rem dotted goldenrod;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  display: -webkit-box;
+  justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  padding: 0px calc(1.5 * var(--universal-padding));
+}
+
+#calculadora {
+  width: 400px;
+  background: #f0f0f0;
+  border-radius: var(--raio-borda);
+  border: 0.0625rem solid #e0e0e0;
+  padding: calc(1.5 * var(--espacamento-universal));
+  transform: rotatex(-10deg) rotatez(-5deg) rotateY(-10deg);
+  -webkit-transform: rotatex(-10deg) rotatez(-5deg) rotateY(-10deg);
+}
+
+#calculadora::after {
+  content: " ";
+  top: 9px;
+  right: 100%;
+  height: 100%;
+  position: absolute;
+  transform: skewY(-45deg);
+  border-radius: var(--raio-borda);
+  -webkit-transform: skewY(-45deg);
+  background: -webkit-gradient(linear, right top, left top,
+    from(rgba(0, 0, 0, 0.1)),
+    to(rgba(0, 0, 0, 0.3)));
+    padding: 2px calc(1.4 * var(--espacamento-universal));
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+}
+
+#calculadora::before {
+  content: " ";
+  top: 100%;
+  left: -11px;
+  width: 100%;
+  position: absolute;
+  transform: skew(-45deg);
+  -webkit-transform: skew(-45deg);
+  background: -webkit-gradient(linear, left top, left bottom,
+    from(rgba(0, 0, 0, 0.1)),
+    to(rgba(0, 0, 0, 0.5)));
+  border-radius: var(--raio-borda);
+  padding: calc(1.5 * var(--espacamento-universal)) 0px;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+#calculadora #tela {
+  font-size: 3rem;
+  text-align: right;
+  background: #e0e0e0;
+  padding: calc(1.5 * var(--espacamento-universal));
+  border: 0.1rem inset steelblue;
+  border-top-width: 0.3rem;
+  border-right-width: 0.2rem;
+  border-radius: var(--raio-borda);
+  overflow-x: scroll;
+}
+
+#calculadora #controlos {
+  width: 100%;
+  display: grid;
+  gap: var(--espacamento-universal);
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: calc(1.5 * var(--espacamento-universal));
+}
+
+#controlos .botoes {
+  display: grid;
+  text-align: center;
+  grid-column: span 3;
+  gap: var(--espacamento-universal);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#controlos .botoes #botao-0 {
+  grid-column: span 2;
+}
+
+#controlos .operadores {
+  flex: 1;
+  display: grid;
+  text-align: center;
+  -webkit-box-flex: 1;
+  grid-template-rows: repeat(5, 1fr);
+  gap: var(--espacamento-universal);
+}
+
+.operadores .botao {
+  background-color: steelblue;
+}
+
+#controlos .botao:focus,
+#controlos .botao:active,
+#controlos .botao.activo {
+  background: #3b3c3d;
+  border-left: 0.0625rem solid #3b3c3d;
+  border-bottom: 0.0625rem solid #3b3c3d;
+}
