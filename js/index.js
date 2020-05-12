@@ -175,6 +175,4 @@ window.addEventListener("load", () => {
                 break;
         }
     }
-
-
 });
