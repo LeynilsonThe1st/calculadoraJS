@@ -19,11 +19,11 @@ window.addEventListener("load", () => {
         tela.innerHTML = valor;
     }
 
-    function arrendodar(valor, places=8) {
+    function arrendodar(valor, places = 8) {
         let power = Math.pow(10, places);
         let res = Math.round(valor * power) / power;
         if (res.toFixed().length > 1 && res.toString().length > 10) {
-            return arrendodar(res, 9 - parseInt(res.toFixed().length) );
+            return arrendodar(res, 9 - parseInt(res.toFixed().length));
         }
         return res;
     }
@@ -47,22 +47,21 @@ window.addEventListener("load", () => {
                 ? e.target.value
                 : Number.parseInt(e.target.value);
         actualizarTela(valor);
-        console.log(num1, num2, operador);
+        debug();
     }
 
     function contemPonto(valor) {
         if (valor.indexOf(".") > 0) {
             return true;
         }
-        return false
-     }
+        return false;
+    }
 
     function operadorPress(e) {
         animar(e.target);
         let oper = e.target.value;
 
         if (typeof num1 == typeof num2) {
-            // tela.innerHTML;
             num1 = resultado = calcular(
                 parseFloat(num1),
                 parseFloat(num2),
@@ -74,6 +73,7 @@ window.addEventListener("load", () => {
         } else {
             limpar();
         }
+
         switch (oper) {
             case "+":
                 operador = operador != "+" ? oper : operador;
@@ -102,7 +102,7 @@ window.addEventListener("load", () => {
             default:
                 break;
         }
-        console.log(num1, num2, operador);
+        debug();
     }
 
     function actualizarTela(valor) {
@@ -119,21 +119,20 @@ window.addEventListener("load", () => {
                 }
                 break;
             case "+/-":
-                if (tela.innerHTML[0] == "-") {
-                    tela.innerHTML = parseFloat(tela.innerHTML.substring(1));
-                } else if (tela.innerHTML.length == 0) {
-                    tela.innerHTML = "-";
+                if (operador && typeof num2 == "number") {
+                    imprimir(negar(num2));
+                } else if (!operador && typeof num1 == "number") {
+                    imprimir(negar(num1));
                 } else {
-                    if (typeof num1 == "number") {
-                        tela.innerHTML = "-" + num1;
-                        break
-                    }
-                    tela.innerHTML = "-" + tela.innerHTML;
+                    imprimir(negar(tela.innerHTML));
                 }
-                console.log(num1, num2, operador, tela.innerHTML);
                 break;
             case "%":
-                tela.innerHTML = perc(tela.innerHTML);
+                if (operador) {
+                    imprimir(perc(num2));
+                } else {
+                    imprimir(perc(num1));
+                }
                 break;
             default:
                 if (tela.innerHTML.length < 9) {
@@ -161,18 +160,35 @@ window.addEventListener("load", () => {
         return valor / 100;
     }
 
+    function negar(valor) {
+        return valor - valor * 2;
+    }
+
     function calcular(n1, n2, op) {
         switch (op) {
             case "+":
-                return n1 + n2;
+                return arrendodar(n1 + n2);
             case "-":
-                return n1 - n2;
+                return arrendodar(n1 - n2);
             case "x":
-                return n1 * n2;
+                return arrendodar(n1 * n2);
             case "/":
                 return arrendodar(n1 / n2);
             default:
                 break;
+        }
+    }
+
+    function debug(on = true) {
+        if (on) {
+            console.clear();
+            console.table({
+                tela: tela.innerHTML,
+                num1: num1,
+                num2: num2,
+                resultado: resultado,
+                operador: operador
+            });
         }
     }
 });
