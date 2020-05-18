@@ -15,6 +15,13 @@ window.addEventListener("load", () => {
         botao.addEventListener("click", operadorPress);
     });
 
+    tela.addEventListener("click", () => {
+        actualizarTela("del");
+        debug();
+    });
+
+    window.addEventListener("keyup", teclaPress);
+
     function imprimir(valor) {
         tela.innerHTML = valor;
     }
@@ -37,16 +44,101 @@ window.addEventListener("load", () => {
 
     function botaoPress(e) {
         animar(e.target);
-        if (resultado) {
-            limpar();
-            resultado = undefined;
-        }
 
         let valor =
             Number.parseInt(e.target.value) != NaN
                 ? e.target.value
                 : Number.parseInt(e.target.value);
         actualizarTela(valor);
+        debug();
+    }
+
+    function teclaPress(e) {
+        let tecla = e.key;
+        let op;
+        switch (tecla) {
+            case "0":
+                animar(document.querySelector("#botao-0"));
+                actualizarTela(0);
+                break;
+            case "1":
+                animar(document.querySelector("#botao-1"));
+                actualizarTela(1);
+                break;
+            case "2":
+                animar(document.querySelector("#botao-2"));
+                actualizarTela(2);
+                break;
+            case "3":
+                animar(document.querySelector("#botao-3"));
+                actualizarTela(3);
+                break;
+            case "4":
+                animar(document.querySelector("#botao-4"));
+                actualizarTela(4);
+                break;
+            case "5":
+                animar(document.querySelector("#botao-5"));
+                actualizarTela(5);
+                break;
+            case "6":
+                animar(document.querySelector("#botao-6"));
+                actualizarTela(6);
+                break;
+            case "7":
+                animar(document.querySelector("#botao-7"));
+                actualizarTela(7);
+                break;
+            case "8":
+                animar(document.querySelector("#botao-8"));
+                actualizarTela(8);
+                break;
+            case "9":
+                animar(document.querySelector("#botao-9"));
+                actualizarTela(9);
+                break;
+            case ".":
+                animar(document.querySelector("#botao-ponto"));
+                actualizarTela(".");
+                break;
+            case "c":
+                animar(document.querySelector("#botao-ac"));
+                actualizarTela("ac");
+                break;
+            case "%":
+                animar(document.querySelector("#botao-perc"));
+                actualizarTela("%");
+                break;
+            case "+":
+                op = document.querySelector("#oper-mais");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
+            case "-":
+                op = document.querySelector("#oper-menos");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
+            case "/":
+                op = document.querySelector("#oper-div");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
+            case "*":
+                op = document.querySelector("#oper-mult");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
+            case "=":
+            case "Enter":
+                op = document.querySelector("#oper-igual");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
+            case "Backspace":
+                actualizarTela("del")
+                break;
+        }
         debug();
     }
 
@@ -57,9 +149,9 @@ window.addEventListener("load", () => {
         return false;
     }
 
-    function operadorPress(e) {
-        animar(e.target);
-        let oper = e.target.value;
+    function operadorPress(e, btn, op) {
+        animar(btn || e.target);
+        let oper = op || e.target.value;
 
         if (typeof num1 == typeof num2) {
             num1 = resultado = calcular(
@@ -106,12 +198,26 @@ window.addEventListener("load", () => {
     }
 
     function actualizarTela(valor) {
+        if (resultado) {
+            limpar();
+            resultado = undefined;
+        }
         switch (valor) {
             case "ac":
                 num1 = undefined;
                 num2 = undefined;
                 operador = undefined;
                 limpar();
+                animarTela();
+                break;
+            case "del":
+                if (operador && typeof num2 == "number") {
+                    imprimir(apagar(num2));
+                } else if (!operador && typeof num1 == "number") {
+                    imprimir(apagar(num1));
+                } else {
+                    imprimir(apagar(tela.innerHTML));
+                }
                 break;
             case ".":
                 if (!contemPonto(tela.innerHTML)) {
@@ -162,6 +268,27 @@ window.addEventListener("load", () => {
 
     function negar(valor) {
         return valor - valor * 2;
+    }
+
+    function apagar(valor) {
+        if (valor != 0) {
+            let num = valor.toString();
+            if (num.length > 1) {
+                animarTela();
+                return parseFloat(num.substring(0, num.length - 1));
+            }
+            animarTela();
+            return 0;
+        }
+        animarTela();
+        return valor;
+    }
+
+    function animarTela() {
+        tela.classList.add("apagado");
+        setTimeout(() => {
+            tela.classList.remove("apagado");
+        }, 200);
     }
 
     function calcular(n1, n2, op) {

@@ -1,5 +1,5 @@
 :root {
-  --cor-do-botao: #aaa;
+  --cor-do-botao: #9b9c9d;
   --raio-borda: 0.125rem;
   --cor-fonte-botao: white;
   --margem-universal: 0.5rem;
@@ -138,6 +138,7 @@ h3 span a {
 
 #calculadora #tela {
   font-size: 3rem;
+  cursor: pointer;
   font-family: monaco, menlo, monospace;
   text-align: right;
   background: #e0e0e0;
@@ -147,6 +148,12 @@ h3 span a {
   border-right-width: 0.2rem;
   border-radius: var(--raio-borda);
   overflow-x: scroll;
+  transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: background 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#calculadora #tela.apagado {
+  background: indianred;
 }
 
 #calculadora #controlos {
