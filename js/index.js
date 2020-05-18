@@ -15,20 +15,20 @@ window.addEventListener("load", () => {
         botao.addEventListener("click", operadorPress);
     });
 
-    tela.addEventListener("click", () => {
+    tela.addEventListener("mousedown", () => {
         actualizarTela("del");
         debug();
     });
 
-    window.addEventListener("keyup", teclaPress);
+    window.addEventListener("keydown", teclaPress);
 
     function imprimir(valor) {
         tela.innerHTML = valor;
     }
 
-    function arrendodar(valor, places = 8) {
-        let power = Math.pow(10, places);
-        let res = Math.round(valor * power) / power;
+    function arrendodar(valor, casas = 8) {
+        let pot = Math.pow(10, casas);
+        let res = Math.round(valor * pot) / pot;
         if (res.toFixed().length > 1 && res.toString().length > 10) {
             return arrendodar(res, 9 - parseInt(res.toFixed().length));
         }
@@ -130,13 +130,18 @@ window.addEventListener("load", () => {
                 operadorPress(e, op, op.value);
                 break;
             case "=":
+                op = document.querySelector("#oper-igual");
+                animar(op);
+                operadorPress(e, op, op.value);
+                break;
             case "Enter":
+                e.preventDefault();
                 op = document.querySelector("#oper-igual");
                 animar(op);
                 operadorPress(e, op, op.value);
                 break;
             case "Backspace":
-                actualizarTela("del")
+                actualizarTela("del");
                 break;
         }
         debug();
