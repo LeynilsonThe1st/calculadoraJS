@@ -7,6 +7,8 @@ window.addEventListener("load", () => {
     var botoes = document.querySelectorAll("button[id*=botao-]");
     var operadores = document.querySelectorAll("button[id*=oper-]");
 
+    alert("Podes usar as teclas do teclado para digitar números e operadores\nPressione C para limpar a tela e DELETE ou na tela para eliminar um dígito de cada vez\n");
+
     botoes.forEach(botao => {
         botao.addEventListener("click", botaoPress);
     });
@@ -17,7 +19,7 @@ window.addEventListener("load", () => {
 
     tela.addEventListener("mousedown", () => {
         actualizarTela("del");
-        debug();
+        debug(false);
     });
 
     window.addEventListener("keydown", teclaPress);
@@ -50,7 +52,7 @@ window.addEventListener("load", () => {
                 ? e.target.value
                 : Number.parseInt(e.target.value);
         actualizarTela(valor);
-        debug();
+        debug(false);
     }
 
     function teclaPress(e) {
@@ -144,7 +146,7 @@ window.addEventListener("load", () => {
                 actualizarTela("del");
                 break;
         }
-        debug();
+        debug(false);
     }
 
     function contemPonto(valor) {
@@ -199,7 +201,7 @@ window.addEventListener("load", () => {
             default:
                 break;
         }
-        debug();
+        debug(false);
     }
 
     function actualizarTela(valor) {
